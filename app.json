@@ -1,0 +1,12 @@
+{
+  "name": "rn-three-fiber",
+  "displayName": "rn-three-fiber",
+  "expo": {
+    "name": "rn-three-fiber",
+    "slug": "rn-three-fiber",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
