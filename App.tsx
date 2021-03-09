@@ -2,6 +2,7 @@ import React, { useRef, useState, FC } from 'react';
 
 import { a, useSpring } from '@react-spring/three';
 import { Canvas, useFrame } from 'react-three-fiber';
+import { OrbitControls } from '@react-three/drei';
 
 interface Props {
   position: [number, number, number]
@@ -50,9 +51,9 @@ const Box: FC<Props> = ({ position }) => {
       ref={mesh}
       position={position}
       scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
+      onClick={() => setActive(!active)}
+      onPointerOver={() => setHover(true)}
+      onPointerOut={() => setHover(false)}
     >
       <boxBufferGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
@@ -60,21 +61,20 @@ const Box: FC<Props> = ({ position }) => {
   )
 }
 
-export default () => {
-  return (
-    <>
-      <Canvas>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Box position={[-1.2, 0, 0]} />
-        <Box position={[1.2, 0, 0]} />
-      </Canvas>
+export default () => (
+  <>
+    <Canvas>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Box position={[-1.2, 0, 0]} />
+      <Box position={[1.2, 0, 0]} />
+      <OrbitControls />
+    </Canvas>
 
-      <Canvas colorManagement camera={{ position: [-10, 10, 10], fov: 35 }}>
-        <ambientLight />
-        <pointLight position={[-10, 10, -10]} castShadow />
-        <ReactSpringBox />
-      </Canvas>
-    </>
-  );
-}
+    <Canvas colorManagement camera={{ position: [-10, 10, 10], fov: 35 }}>
+      <ambientLight />
+      <pointLight position={[-10, 10, -10]} castShadow />
+      <ReactSpringBox />
+    </Canvas>
+  </>
+);
